@@ -29,13 +29,13 @@ function App() {
   const [dataDog, setDataDog] = useState([{ image: "", name: "" }]);
   const [spinner, setSpinner] = useState(true);
 
-  function imagenesPerro() {
+  const imagenesPerro = () => {
     setSpinner(true);
     axios.get("https://dog.ceo/api/breeds/image/random").then((response) => {
       setDog(response.data.message);
       setSpinner(false);
     });
-  }
+  };
   useEffect(() => {
     imagenesPerro();
     nombrePerro();
