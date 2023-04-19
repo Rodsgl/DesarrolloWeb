@@ -22,7 +22,7 @@ import BackspaceIcon from "@mui/icons-material/Backspace";
 import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 
 function App() {
-  const [dog, setDog] = useState([]);
+  const [dog, setDog] = useState("");
   const [nameDog, setNameDog] = useState("");
   const [listaAceptado, setListaAceptado] = useState([]);
   const [listaRechazado, setListaRechazado] = useState([]);
