@@ -18,7 +18,6 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-import DeleteIcon from "@mui/icons-material/Delete";
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 
@@ -27,10 +26,10 @@ function App() {
   const [nameDog, setNameDog] = useState("");
   const [listaAceptado, setListaAceptado] = useState([]);
   const [listaRechazado, setListaRechazado] = useState([]);
-  const [dataDog, setDataDog] = useState([{ image: "", nombre: "" }]);
+  const [dataDog, setDataDog] = useState([{ image: "", name: "" }]);
   const [spinner, setSpinner] = useState(true);
 
-  function fetchDogImage() {
+  function imagenesPerro() {
     setSpinner(true);
     axios.get("https://dog.ceo/api/breeds/image/random").then((response) => {
       setDog(response.data.message);
@@ -38,7 +37,7 @@ function App() {
     });
   }
   useEffect(() => {
-    fetchDogImage();
+    imagenesPerro();
     nombrePerro();
   }, []);
 
@@ -56,36 +55,32 @@ function App() {
   };
 
   useEffect(() => {
-    setDataDog({ image: dog, nombre: nameDog });
+    setDataDog({ image: dog, name: nameDog });
   }, [dog]);
   //console.log(dataDog);
 
   const aceptarPerro = (item) => {
     //console.log(item);
     setListaAceptado((listaAceptado) => [...listaAceptado, item]);
-    fetchDogImage();
+    imagenesPerro();
     nombrePerro();
     //console.log(listaAceptado);
   };
 
   const rechazarPerro = (item) => {
     setListaRechazado((listaRechazado) => [...listaRechazado, item]);
-    fetchDogImage();
+    imagenesPerro();
     nombrePerro();
   };
   //console.log(listaRechazado);
 
   const sacarRechazado = (item) => {
-    let result = listaRechazado.filter(
-      (itemAux) => itemAux.nombre != item.nombre
-    );
+    let result = listaRechazado.filter((itemAux) => itemAux.name != item.name);
     setListaRechazado(result);
     setListaAceptado((listaAceptado) => [...listaAceptado, item]);
   };
   const sacarAceptado = (item) => {
-    let result = listaAceptado.filter(
-      (itemAux) => itemAux.nombre != item.nombre
-    );
+    let result = listaAceptado.filter((itemAux) => itemAux.name != item.name);
     setListaAceptado(result);
     setListaRechazado((listaRechazado) => [...listaRechazado, item]);
   };
@@ -126,12 +121,12 @@ function App() {
                     srcSet={`${item.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                   />
                   <ImageListItemBar
-                    title={item.nombre}
+                    title={item.name}
                     subtitle={"descripción"}
                     actionIcon={
                       <IconButton
                         sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                        aria-label="go Back"
+                        aria-label="dele pah elante nomás"
                         onClick={() => sacarRechazado(item)}
                       >
                         <SportsKabaddiIcon />
@@ -194,12 +189,12 @@ function App() {
                     srcSet={`${item.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                   />
                   <ImageListItemBar
-                    title={item.nombre}
+                    title={item.name}
                     subtitle={"descripción"}
                     actionIcon={
                       <IconButton
                         sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                        aria-label="go Back"
+                        aria-label="no tú no"
                         onClick={() => sacarAceptado(item)}
                       >
                         <BackspaceIcon />
