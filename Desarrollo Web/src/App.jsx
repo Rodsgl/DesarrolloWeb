@@ -46,6 +46,7 @@ function App() {
   const [dog, setDog] = useState("");
   const [nameDog, setNameDog] = useState("");
   const [descriptionDog, setDescriptionDog] = useState("");
+  const [descriptionPopper, setDescriptionPopper] = useState("");
   const [listaAceptado, setListaAceptado] = useState([]);
   const [listaRechazado, setListaRechazado] = useState([]);
   const [dataDog, setDataDog] = useState([{ image: "", name: "", desc: "" }]);
@@ -73,9 +74,9 @@ function App() {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handlePopper = (event) => {
-    console.log("hola");
-    setAnchorEl(anchorEl ? null : event.currentTarget);
+  const handlePopper = (event, desc) => {
+    setDescriptionPopper(desc);
+    setAnchorEl(anchorEl == event.currentTarget ? null : event.currentTarget);
   };
 
   const open = Boolean(anchorEl);
@@ -119,7 +120,7 @@ function App() {
     imagenesPerro();
     nombrePerro();
     generarLorem();
-    //console.log(listaAceptado);
+    console.log(listaAceptado);
   };
 
   const rechazarPerro = (item) => {
@@ -129,7 +130,7 @@ function App() {
     nombrePerro();
     generarLorem();
   };
-  //console.log(listaRechazado);
+  console.log(listaRechazado);
 
   const sacarRechazado = (item) => {
     let result = listaRechazado.filter((itemAux) => itemAux.name != item.name);
@@ -236,7 +237,7 @@ function App() {
                           sx={{ color: "rgba(255, 255, 255, 0.54)" }}
                           aria-describedby={index}
                           aria-label="descripción"
-                          onClick={handlePopper}
+                          onClick={(e) => handlePopper(e, item.desc)}
                         >
                           <VisibilityIcon />
                         </IconButton>
@@ -253,17 +254,6 @@ function App() {
                             <BackspaceIcon />
                           </IconButton>
                         </Tooltip>
-                        <Popper id={index} open={open} anchorEl={anchorEl}>
-                          <Box
-                            sx={{
-                              border: 1,
-                              p: 1,
-                              bgcolor: "#1a1a1a",
-                            }}
-                          >
-                            {item.desc}
-                          </Box>
-                        </Popper>
                       </>
                     }
                   />
@@ -302,7 +292,7 @@ function App() {
                           sx={{ color: "rgba(255, 255, 255, 0.54)" }}
                           aria-describedby={index}
                           aria-label="descripción"
-                          onClick={handlePopper}
+                          onClick={(e) => handlePopper(e, item.desc)}
                         >
                           <VisibilityIcon />
                         </IconButton>
@@ -322,17 +312,6 @@ function App() {
                             <SportsKabaddiIcon />
                           </IconButton>
                         </Tooltip>
-                        <Popper id={id} open={open} anchorEl={anchorEl}>
-                          <Box
-                            sx={{
-                              border: 1,
-                              p: 1,
-                              bgcolor: "#1a1a1a",
-                            }}
-                          >
-                            {item.name}
-                          </Box>
-                        </Popper>
                       </>
                     }
                   ></ImageListItemBar>
@@ -342,6 +321,17 @@ function App() {
           </Card>
         </Grid>
       </Grid>
+      <Popper id={id} open={open} anchorEl={anchorEl}>
+        <Box
+          sx={{
+            border: 1,
+            p: 1,
+            bgcolor: "#1a1a1a",
+          }}
+        >
+          {descriptionPopper}
+        </Box>
+      </Popper>
     </>
   );
 }
