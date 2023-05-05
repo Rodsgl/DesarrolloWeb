@@ -74,6 +74,7 @@ function App() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handlePopper = (event) => {
+    console.log("hola");
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
@@ -113,7 +114,8 @@ function App() {
 
   const aceptarPerro = (item) => {
     //console.log(item);
-    setListaAceptado((listaAceptado) => [...listaAceptado, item]);
+    setListaAceptado((listaAceptado) => [...listaAceptado, item].reverse());
+
     imagenesPerro();
     nombrePerro();
     generarLorem();
@@ -121,7 +123,8 @@ function App() {
   };
 
   const rechazarPerro = (item) => {
-    setListaRechazado((listaRechazado) => [...listaRechazado, item]);
+    //console.log(item);
+    setListaRechazado((listaRechazado) => [...listaRechazado, item].reverse());
     imagenesPerro();
     nombrePerro();
     generarLorem();
@@ -327,7 +330,7 @@ function App() {
                               bgcolor: "#1a1a1a",
                             }}
                           >
-                            {item.desc}
+                            {item.name}
                           </Box>
                         </Popper>
                       </>
