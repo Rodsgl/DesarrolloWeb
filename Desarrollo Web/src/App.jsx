@@ -120,7 +120,7 @@ function App() {
     imagenesPerro();
     nombrePerro();
     generarLorem();
-    console.log(listaAceptado);
+    //console.log(listaAceptado);
   };
 
   const rechazarPerro = (item) => {
@@ -130,7 +130,7 @@ function App() {
     nombrePerro();
     generarLorem();
   };
-  console.log(listaRechazado);
+  //console.log(listaRechazado);
 
   const sacarRechazado = (item) => {
     let result = listaRechazado.filter((itemAux) => itemAux.name != item.name);
